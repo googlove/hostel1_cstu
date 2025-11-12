@@ -5,41 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎓 Інформаційний Буклет ЧДТУ: Гуртожиток №1</title>
     <style>
+        /* НОВЕ: CSS Змінні для Світлої та Темної Теми */
+        :root {
+            --bg-gradient-start: #69f0ae;
+            --bg-gradient-end: #00796b;
+            --primary-accent: #004d40;
+            --primary-accent-hover: #009688;
+            --text-color: #1a1a1a;
+            --text-color-secondary: #333;
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.4);
+            --header-glass-bg: rgba(255, 255, 255, 0.15);
+            --header-glass-border: rgba(255, 255, 255, 0.3);
+            --shadow-color: rgba(31, 38, 135, 0.37);
+        }
+
+        /* НОВЕ: Визначення кольорів для темного режиму */
+        body.dark-mode {
+            --bg-gradient-start: #00251a;
+            --bg-gradient-end: #013220;
+            --primary-accent: #69f0ae;
+            --primary-accent-hover: #b9f6ca;
+            --text-color: #e0e0e0;
+            --text-color-secondary: #c0c0c0;
+            --glass-bg: rgba(30, 30, 30, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --header-glass-bg: rgba(10, 10, 10, 0.15);
+            --header-glass-border: rgba(255, 255, 255, 0.2);
+            --shadow-color: rgba(0, 0, 0, 0.37);
+        }
+
         /* Базові стилі та шрифти */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             margin: 0;
             padding: 0;
-            /* ЗМІНЕНО: Новий темно-зелений/бірюзовий градієнт */
-            background: linear-gradient(135deg, #69f0ae 0%, #00796b 100%); 
-            color: #1a1a1a;
+            /* ВИКОРИСТАННЯ ЗМІННИХ */
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%); 
+            color: var(--text-color);
             min-height: 100vh;
-            /* ВАЖЛИВО: Відступ для фіксованої навігації внизу */
             padding-bottom: 75px; 
+            transition: background 0.5s ease, color 0.5s ease;
+
+            /* НОВЕ: Анімований фон */
+            background-size: 200% 200%;
+            animation: gradient-flow 10s ease infinite;
+        }
+
+        /* НОВЕ: Анімація для фону */
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* HEADER STYLES (Glassmorphism) */
         header {
-            background: rgba(255, 255, 255, 0.15); /* Glassmorphism */
+            background: var(--header-glass-bg); /* ЗМІННА */
             backdrop-filter: blur(8px);
-            color: #1a1a1a;
+            color: var(--text-color); /* ЗМІННА */
             padding: 20px 10px;
             text-align: center;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 1px solid var(--header-glass-border); /* ЗМІННА */
             position: sticky; 
             top: 0;
             z-index: 100; 
+            transition: background 0.5s ease, border 0.5s ease;
+            
+            /* НОВЕ: Flexbox для розміщення кнопки теми */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Цей селектор h1 був у коді, але в HTML використовується h2. 
-           Я залишаю його, але колір буде контролюватись загальним h2. */
-        header h1 {
-            font-size: 1.8em;
-            margin-bottom: 5px;
+        /* НОВЕ: Стилі для контейнера заголовку (щоб кнопка не збивала) */
+        header .title-container {
+            flex-grow: 1;
+            text-align: center;
+            /* Відступ, щоб компенсувати кнопку */
+            margin-left: 50px; 
         }
 
-        /* NAVIGATION STYLES (Fixed Footer / TikTok Style) */
+        /* НОВЕ: Кнопка зміни теми */
+        #theme-toggle {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-color);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.5em;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            margin-left: 10px; /* Відступ від краю */
+            flex-shrink: 0;
+        }
+        #theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        /* Компенсація відступу для кнопки (щоб заголовок був по центру) */
+        header::after {
+            content: "";
+            width: 50px; /* Така ж ширина як у кнопки + відступ */
+        }
+
+
+        /* NAVIGATION STYLES */
         nav {
             position: fixed; 
             bottom: 0;
@@ -93,6 +166,12 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
 
+        /* НОВЕ: Мікровзаємодія при кліку */
+        nav a:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+
         /* GLASSMORHPISM CONTAINER STYLES */
         .book-container {
             max-width: 900px;
@@ -104,12 +183,12 @@
         /* Стилі для прокрутки контенту всередині секції */
         section {
             padding: 25px;
-            background: rgba(255, 255, 255, 0.2); 
+            background: var(--glass-bg); /* ЗМІННА */
             backdrop-filter: blur(10px); 
             border-radius: 15px;
             margin: 10px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); 
-            border: 1px solid rgba(255, 255, 255, 0.4); 
+            box-shadow: 0 8px 32px 0 var(--shadow-color); /* ЗМІННА */
+            border: 1px solid var(--glass-border); /* ЗМІННА */
             position: absolute; 
             top: 0;
             left: 0;
@@ -117,7 +196,7 @@
             max-height: calc(100vh - 120px - 75px); 
             overflow-y: auto;
             min-height: 400px;
-            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out, background 0.5s ease, border 0.5s ease;
         }
         
         section:not(.active) {
@@ -126,32 +205,63 @@
         
         /* Стилі для контенту */
         h2 {
-            /* ЗМІНЕНО: Колір на темно-бірюзовий */
-            color: #004d40; 
-            /* ЗМІНЕНО: Колір рамки на темно-бірюзовий (з прозорістю) */
-            border-bottom: 2px solid rgba(0, 77, 64, 0.2); 
+            color: var(--primary-accent); /* ЗМІННА */
+            border-bottom: 2px solid var(--primary-accent); /* ЗМІННА (зменшив прозорість для видимості) */
             padding-bottom: 5px;
             margin-top: 0;
+            transition: color 0.5s ease, border-bottom-color 0.5s ease;
         }
         h3 {
-            color: #333;
+            color: var(--text-color-secondary); /* ЗМІННА */
             margin-top: 20px;
+            transition: color 0.5s ease;
         }
 
         a {
-            /* ЗМІНЕНО: Колір на темно-бірюзовий */
-            color: #004d40; 
+            color: var(--primary-accent); /* ЗМІННА */
             text-decoration: none;
             font-weight: 600;
+            transition: color 0.3s ease;
         }
-        /* ЗМІНЕНО: Колір при наведенні (яскравіший бірюзовий) */
-        a:hover { color: #009688; text-decoration: underline; }
+        a:hover { 
+            color: var(--primary-accent-hover); /* ЗМІННА */
+            text-decoration: underline; 
+        }
         
         /* Ефект "перегортання" */
         .page.animating-out {
             transform: perspective(1000px) rotateY(90deg);
             opacity: 0;
             display: block;
+        }
+
+        /* НОВЕ: Стилі для кнопки "Нагору" */
+        #to-top-btn {
+            position: fixed;
+            bottom: 90px; /* Над навігацією */
+            right: 15px;
+            width: 45px;
+            height: 45px;
+            font-size: 1.8em;
+            line-height: 45px;
+            text-align: center;
+            background: var(--glass-bg);
+            color: var(--primary-accent);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+            z-index: 150;
+            /* Схована за замовчуванням */
+            opacity: 0;
+            transform: translateY(20px);
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        #to-top-btn.visible {
+            opacity: 1;
+            transform: translateY(0);
+            visibility: visible;
         }
         
         /* ADAPTIVE STYLES */
@@ -166,13 +276,29 @@
                 padding: 15px;
                 max-height: calc(100vh - 120px - 70px);
             }
+            /* НОВЕ: Адаптація хедера */
+            header .title-container {
+                margin-left: 45px; /* Менший відступ */
+            }
+            #theme-toggle {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2em;
+            }
+            header::after {
+                width: 45px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h2>📖 Інформаційний Буклет: Гуртожиток №1</h2>
-        <p>📱💻 Буклет допомоги студентам</p>
+        <button id="theme-toggle">🌙</button>
+
+        <div class="title-container">
+            <h2>📖 Інформаційний Буклет: Гуртожиток №1</h2>
+            <p>📱💻 Буклет допомоги студентам</p>
+        </div>
     </header>
     
     <div class="book-container">
@@ -304,11 +430,22 @@
         </ul>
     </nav>
     
+    <button id="to-top-btn">⬆️</button>
+
     <script>
         const navLinks = document.querySelectorAll('nav a');
         const sections = document.querySelectorAll('.page');
         let activeSectionId = 'manifest'; 
+        
+        // НОВЕ: Елементи для нових функцій
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const toTopBtn = document.getElementById('to-top-btn');
+        let currentActiveSectionElement = null; // Зберігаємо поточну активну секцію
 
+        /**
+         * Перемикає активну сторінку з ефектом "перегортання".
+         */
         function showPage(pageId, clickedElement) {
             if (pageId === activeSectionId) {
                 return;
@@ -331,14 +468,18 @@
                         newActiveSection.style.display = 'block';
                         newActiveSection.classList.add('active');
                         newActiveSection.classList.remove('animating-out'); 
-                         newActiveSection.scrollTop = 0;
+                        newActiveSection.scrollTop = 0;
+
+                        // НОВЕ: Налаштовуємо логіку скролу для нової секції
+                        setupSectionScroll(newActiveSection);
                     }
                 }, 600); 
             } else {
-                sections.forEach(page => page.classList.remove('active'));
+                // (Це спрацює при першому завантаженні, але ми вже робимо це в DOMContentLoaded)
                 const newActiveSection = document.getElementById(pageId);
                 if (newActiveSection) {
                     newActiveSection.classList.add('active');
+                    setupSectionScroll(newActiveSection); // НОВЕ
                 }
             }
 
@@ -351,7 +492,74 @@
             history.pushState(null, null, `#${pageId}`);
         }
         
+        // --- НОВІ ФУНКЦІЇ ---
+
+        /**
+         * НОВЕ: Обробник прокрутки для секцій
+         * Показує або ховає кнопку "Нагору"
+         */
+        function handleSectionScroll(event) {
+            if (event.target.scrollTop > 200) {
+                toTopBtn.classList.add('visible');
+            } else {
+                toTopBtn.classList.remove('visible');
+            }
+        }
+
+        /**
+         * НОВЕ: Функція для налаштування слухача прокрутки
+         * Також оновлює клік для кнопки "Нагору"
+         */
+        function setupSectionScroll(sectionElement) {
+            if (!sectionElement) return;
+
+            // Видаляємо старий слухач, якщо він був
+            if (currentActiveSectionElement) {
+                currentActiveSectionElement.removeEventListener('scroll', handleSectionScroll);
+            }
+            
+            // Додаємо новий слухач
+            sectionElement.addEventListener('scroll', handleSectionScroll);
+            currentActiveSectionElement = sectionElement;
+            
+            // Ховаємо кнопку, бо секція нова (нагорі)
+            toTopBtn.classList.remove('visible');
+            
+            // Оновлюємо, куди буде скролити кнопка
+            toTopBtn.onclick = () => {
+                sectionElement.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+        }
+
+        /**
+         * НОВЕ: Логіка перемикання теми
+         */
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Зберігаємо вибір та оновлюємо іконку
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            }
+        });
+
+
+        // --- Ініціалізація при завантаженні сторінки ---
         document.addEventListener('DOMContentLoaded', () => {
+            // 1. Встановлення Теми
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                themeToggle.textContent = '☀️';
+            } else {
+                themeToggle.textContent = '🌙';
+            }
+            
+            // 2. Ініціалізація сторінки
             const initialPageId = window.location.hash ? window.location.hash.substring(1) : 'manifest';
             activeSectionId = initialPageId;
             
@@ -361,6 +569,9 @@
             if(initialPage) {
                 initialPage.style.display = 'block';
                 initialPage.classList.add('active');
+                
+                // НОВЕ: Налаштовуємо скрол для першої завантаженої сторінки
+                setupSectionScroll(initialPage);
             }
             
             const initialNavLink = document.querySelector(`nav a[href="#${initialPageId}"]`);
