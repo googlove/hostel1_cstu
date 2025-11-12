@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Інформаційний Буклет ЧДТУ: Гуртожиток №1</title>
+    <style>
+        /* Базові стилі та шрифти */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            margin: 0;
+            padding: 0;
+            /* ЗМІНЕНО: Новий темно-зелений/бірюзовий градієнт */
+            background: linear-gradient(135deg, #69f0ae 0%, #00796b 100%); 
+            color: #1a1a1a;
+            min-height: 100vh;
+            /* ВАЖЛИВО: Відступ для фіксованої навігації внизу */
+            padding-bottom: 75px; 
+        }
+
+        /* HEADER STYLES (Glassmorphism) */
+        header {
+            background: rgba(255, 255, 255, 0.15); /* Glassmorphism */
+            backdrop-filter: blur(8px);
+            color: #1a1a1a;
+            padding: 20px 10px;
+            text-align: center;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            position: sticky; 
+            top: 0;
+            z-index: 100; 
+        }
+
+        /* Цей селектор h1 був у коді, але в HTML використовується h2. 
+           Я залишаю його, але колір буде контролюватись загальним h2. */
+        header h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        /* NAVIGATION STYLES (Fixed Footer / TikTok Style) */
+        nav {
+            position: fixed; 
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.85); 
+            backdrop-filter: blur(15px); 
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 200; 
+            padding: 5px 0 5px 0; 
+            overflow-x: auto;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-around; 
+            flex-wrap: nowrap;
+            padding: 0 5px;
+        }
+
+        nav li {
+            flex-shrink: 0;
+            text-align: center;
+        }
+        
+        nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #f0f0f0;
+            text-align: center;
+            padding: 5px 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.7em; 
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+        
+        nav a span {
+            font-size: 1.5em; 
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+
+        nav a:hover, nav a.active-nav {
+            color: #ffffff; 
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* GLASSMORHPISM CONTAINER STYLES */
+        .book-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 10px;
+            position: relative;
+        }
+
+        /* Стилі для прокрутки контенту всередині секції */
+        section {
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(10px); 
+            border-radius: 15px;
+            margin: 10px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); 
+            border: 1px solid rgba(255, 255, 255, 0.4); 
+            position: absolute; 
+            top: 0;
+            left: 0;
+            right: 0;
+            max-height: calc(100vh - 120px - 75px); 
+            overflow-y: auto;
+            min-height: 400px;
+            transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+        }
+        
+        section:not(.active) {
+            display: none;
+        }
+        
+        /* Стилі для контенту */
+        h2 {
+            /* ЗМІНЕНО: Колір на темно-бірюзовий */
+            color: #004d40; 
+            /* ЗМІНЕНО: Колір рамки на темно-бірюзовий (з прозорістю) */
+            border-bottom: 2px solid rgba(0, 77, 64, 0.2); 
+            padding-bottom: 5px;
+            margin-top: 0;
+        }
+        h3 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        a {
+            /* ЗМІНЕНО: Колір на темно-бірюзовий */
+            color: #004d40; 
+            text-decoration: none;
+            font-weight: 600;
+        }
+        /* ЗМІНЕНО: Колір при наведенні (яскравіший бірюзовий) */
+        a:hover { color: #009688; text-decoration: underline; }
+        
+        /* Ефект "перегортання" */
+        .page.animating-out {
+            transform: perspective(1000px) rotateY(90deg);
+            opacity: 0;
+            display: block;
+        }
+        
+        /* ADAPTIVE STYLES */
+        @media (max-width: 768px) {
+            nav ul {
+                justify-content: flex-start;
+            }
+            body {
+                padding-bottom: 70px;
+            }
+            section {
+                padding: 15px;
+                max-height: calc(100vh - 120px - 70px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>📖 Інформаційний Буклет: Гуртожиток №1</h2>
+        <p>📱💻 Буклет допомоги студентам</p>
+    </header>
+    
+    <div class="book-container">
+        
+        <section id="manifest" class="page active">
+            <h2>📢 Маніфест-Інформація</h2>
+            <p><strong>✍️ Автор:</strong> @flame4ost</p>
+            <h3>📢 До уваги студентів!</h3>
+            <p>🔮 Голова студради ЧДТУ: <a href="https://t.me/taparrn" target="_blank">https://t.me/taparrn</a></p>
+            
+            <h3>💣 Розклад занять</h3>
+            <p>Розклад на осінній/весняний семестр можна переглянути на сайті ЧДТУ, або в чат-боті:</p>
+            <ol>
+                <li>📜 Офіційний сайт-розклад:<a href="https://t1p.de/b6g3n" target="_blank">t1p.de/b6g3n</a></li>
+                <li>🕗 Розклад-Бот: <a href="https://t.me/cdu_rozklad_bot" target="_blank">t.me/cdu_rozklad_bot</a></li>
+                <li>💎 Застосунок "Студент ЧДТУ+":<a href="https://bit.ly/3MTKUrn" target="_blank">bit.ly/3MTKUrn</a></li>
+                <li>🚀 Неофіційний сайт-розклад: <a href="https://t1p.de/0i7vi" target="_blank">t1p.de/0i7vi</a></li>
+            </ol>
+            
+            <h4>📱 Завантажити додаток-розклад:</h4>
+            <ul>
+                <li>🧶Android: <a href="https://bit.ly/3uWtxQO" target="_blank">bit.ly/3uWtxQO</a> та <a href="https://bit.ly/3xGftg5" target="_blank">bit.ly/3xGftg5</a></li>
+                <li>🍎 IOS: <a href="https://apple.co/3CYsCCm" target="_blank">apple.co/3CYsCCm</a></li>
+            </ul>
+            <p>⚡️ Примітка: для перегляду розкладу в додатку необхідно вказати університет, назву групи або ПІБ викладача та дати.</p>
+            
+            <h3>💬 Контакти Факультетів</h3>
+            <ul>
+                <li>🖥️ ФІТІС: Звертайтесь до <a href="https://t.me/theuniverseisintheheart" target="_blank">@theuniverseisintheheart</a></li>
+                <li>🏗️ ФГТ: Звертайтесь до <a href="https://t.me/Brochetos" target="_blank">@Brochetos</a></li>
+                <li>📊 ФЕУ: Звертайтесь до <a href="https://t.me/artofan_lat" target="_blank">@artofan_lat</a></li>
+                <li>🔌🚗🔧 ФЕТАМ: Звертайтесь до <a href="https://t.me/elvinaaa_aa" target="_blank">@elvinaaa_aa</a></li>
+                <li>🏗️🌿 ФТБРП: Звертайтесь до <a href="https://t.me/NK3105nk" target="_blank">@NK3105nk</a></li>
+            </ul>
+
+            <h3>🌟 Корисні Ресурси ЧДТУ</h3>
+            <ol>
+                <li>💙Чат у Telegram: <a href="https://t.me/cstu_chat" target="_blank">t.me/cstu_chat</a></li>
+                <li>💜 Актуальні новини ЧДТУ: <a href="https://t.me/chdtu" target="_blank">t.me/chdtu</a></li>
+                <li>🟡 Telegram Студентської ради: <a href="https://t.me/stud_rada_cstu/" target="_blank">t.me/stud_rada_cstu/</a></li>
+                <li>🔥 Instagram Студентської ради: <a href="https://instagram.com/stud_rada_chstu/" target="_blank">instagram.com/stud_rada_chstu/</a></li>
+                <li>✍️Записатися в Студентську раду та інше: <a href="https://linktr.ee/sr_cstu" target="_blank">linktr.ee/sr_cstu</a></li>
+                <li>🔊 Розклад дзвінків: <a href="https://bit.ly/3cuMU8K" target="_blank">bit.ly/3cuMU8K</a></li>
+                <li>🔝 Рейтинг студентів: <a href="https://bit.ly/308gfku" target="_blank">bit.ly/308gfku</a></li>
+                <li>📧 Отримати корпоративну пошту: <a href="https://chdtu.edu.ua/cikt/e-mail" target="_blank">chdtu.edu.ua/cikt/e-mail</a></li>
+                <li>🔎 Розташування корпусів: <a href="https://bit.ly/3xW82Sn" target="_blank">bit.ly/3xW82Sn</a>, <a href="https://bit.ly/3vwbu31" target="_blank">bit.ly/3vwbu31</a></li>
+            </ol>
+            
+            <h3>👨‍🎓 Інформація для гостей міста Черкаси</h3>
+            <h4>🚍 Відстежування транспорту:</h4>
+            <ul>
+                <li>Автобуси/Тролейбуси (Android): <a href="https://bit.ly/3xUU7eR" target="_blank">bit.ly/3xUU7eR</a>, <a href="https://bit.ly/3L246mG" target="_blank">bit.ly/3L246mG</a></li>
+                <li>Автобуси/Тролейбуси (Apple): <a href="https://apple.co/3KYV3D2" target="_blank">apple.co/3KYV3D2</a></li>
+            </ul>
+            <h4>🚆 Розклад поїздів:</h4>
+            <ul>
+                <li>Офіційний додаток (приміські поїзди): <a href="https://bit.ly/3D0Bur0" target="_blank">bit.ly/3D0Bur0</a></li>
+                <li>Офіційний додаток (поїзди): <a href="https://bit.ly/3TMdv5O" target="_blank">bit.ly/3TMdv5O</a></li>
+            </ul>
+
+            <h3>📊 Рейтинг та Оцінювання</h3>
+            <p>📢 Середній бал за навчальні досягнення (СБ) * 0,9 = рейтинговий бал.</p>
+            <h4>Таблиця відповідності результатів контролю:</h4>
+            <ol>
+                <li>90-100 | A | - Відмінно</li>
+                <li>82-89  | B |   - Дуже добре</li>
+                <li>74-81  | C | - Добре</li>
+                <li>64-73  | D | - Задовільно</li>
+                <li>60-63  | E | - Достатньо</li>
+                <li>35-59  | FX| - Незадовільно з можливістю повторного складання.</li>
+                <li>1-34 | F | - Незадовільно з обов'язковим повторним вивченням.</li>
+            </ol>
+        </section>
+
+        <section id="dorm" class="page">
+            <h2>🧭 Гуртожиток №1</h2>
+            <p><strong>Адреса та детальна інформація:</strong></p>
+            <p>Тут ви знайдете всю необхідну інформацію про розташування, контакти адміністрації та умови проживання.</p>
+            <p>👉 <a href="https://bit.ly/3yxW7cU" target="_blank">bit.ly/3yxW7cU</a></p>
+        </section>
+
+        <section id="instagram" class="page">
+            <h2>🧑‍🎓 Студ. Самоврядування</h2>
+            <p>Актуальна інформація від студентського самоврядування гуртожитку №1.</p>
+            <p>👉 Посилання: <a href="https://bit.ly/3Vmkl3t" target="_blank">bit.ly/3Vmkl3t</a></p>
+        </section>
+
+        <section id="bots" class="page">
+            <h2>🤖 Список Корисних Чат-Ботів</h2>
+            <p>Список корисних ботів для студентів ЧДТУ.</p>
+            <p>👉 Посилання на список: <a href="https://bit.ly/3VWLryt" target="_blank">bit.ly/3VWLryt</a></p>
+        </section>
+
+        <section id="channel" class="page">
+            <h2>📣 Новини Гуртожитку</h2>
+            <p>Актуальні новини та оголошення гуртожитку №1.</p>
+            <p>👉 Приєднатися: <a href="https://t.me/cstu_d1" target="_blank">t.me/cstu_d1</a></p>
+        </section>
+
+        <section id="documents" class="page">
+            <h2>📄 Зразки Документів та Заяв</h2>
+            <p>Завантажуйте необхідні зразки документів та заяв.</p>
+            <p>👉 Доступні в папці: <a href="http://surl.li/mhzpd" target="_blank">surl.li/mhzpd</a></p>
+        </section>
+
+        <section id="laundry" class="page">
+            <h2>🧺 Посилання на Прання</h2>
+            <p>Інформація про сервіс "Технопралка" у гуртожитку №1.</p>
+            <p>👉 Переглянути: <a href="https://www.technostirka.com/ch/point/chdtu1f11" target="_blank">technostirka.com/ch/point/chdtu1f11</a></p>
+        </section>
+
+        <section id="schedule" class="page">
+            <h2>🗓 Розклад Занять</h2>
+            <p>Отримайте розклад через Telegram бота.</p>
+            <p>👉 Використовуйте бота: <a href="https://t.me/cdu_rozklad_bot" target="_blank">t.me/cdu_rozklad_bot</a></p>
+        </section>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#manifest" onclick="showPage('manifest', this)"><span>📢</span>Маніфест</a></li>
+            <li><a href="#dorm" onclick="showPage('dorm', this)"><span>🧭</span>Гуртожиток</a></li>
+            <li><a href="#instagram" onclick="showPage('instagram', this)"><span>🧑‍🎓</span>Студрада</a></li>
+            <li><a href="#bots" onclick="showPage('bots', this)"><span>🤖</span>Боти</a></li>
+            <li><a href="#channel" onclick="showPage('channel', this)"><span>📣</span>Новини</a></li>
+            <li><a href="#documents" onclick="showPage('documents', this)"><span>📄</span>Документи</a></li>
+            <li><a href="#laundry" onclick="showPage('laundry', this)"><span>🧺</span>Прання</a></li>
+            <li><a href="#schedule" onclick="showPage('schedule', this)"><span>🗓</span>Розклад</a></li>
+        </ul>
+    </nav>
+    
+    <script>
+        const navLinks = document.querySelectorAll('nav a');
+        const sections = document.querySelectorAll('.page');
+        let activeSectionId = 'manifest'; 
+
+        function showPage(pageId, clickedElement) {
+            if (pageId === activeSectionId) {
+                return;
+            }
+
+            const oldActiveSection = document.getElementById(activeSectionId);
+            if (oldActiveSection) {
+                oldActiveSection.classList.add('animating-out');
+                
+                setTimeout(() => {
+                    oldActiveSection.classList.remove('active');
+                    oldActiveSection.classList.remove('animating-out');
+                    oldActiveSection.style.display = 'none';
+                    
+                    const newActiveSection = document.getElementById(pageId);
+                    if (newActiveSection) {
+                        sections.forEach(page => {
+                            if (page.id !== pageId) page.style.display = 'none';
+                        }); 
+                        newActiveSection.style.display = 'block';
+                        newActiveSection.classList.add('active');
+                        newActiveSection.classList.remove('animating-out'); 
+                         newActiveSection.scrollTop = 0;
+                    }
+                }, 600); 
+            } else {
+                sections.forEach(page => page.classList.remove('active'));
+                const newActiveSection = document.getElementById(pageId);
+                if (newActiveSection) {
+                    newActiveSection.classList.add('active');
+                }
+            }
+
+            navLinks.forEach(link => link.classList.remove('active-nav'));
+            if (clickedElement) {
+                clickedElement.classList.add('active-nav');
+            }
+
+            activeSectionId = pageId;
+            history.pushState(null, null, `#${pageId}`);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialPageId = window.location.hash ? window.location.hash.substring(1) : 'manifest';
+            activeSectionId = initialPageId;
+            
+            sections.forEach(page => page.style.display = 'none');
+            
+            const initialPage = document.getElementById(initialPageId);
+            if(initialPage) {
+                initialPage.style.display = 'block';
+                initialPage.classList.add('active');
+            }
+            
+            const initialNavLink = document.querySelector(`nav a[href="#${initialPageId}"]`);
+            if (initialNavLink) {
+                initialNavLink.classList.add('active-nav');
+            }
+        });
+    </script>
+</body>
+</html>
